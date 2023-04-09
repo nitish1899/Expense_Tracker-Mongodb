@@ -6,7 +6,6 @@ const path = require('path');
 const fs = require('fs');
 
 require("dotenv").config();
-const sequelize = require('./util/database');
 
 var cors = require('cors');
 
@@ -27,12 +26,6 @@ const purchaseRoutes = require('./routes/purchase');
 const premiumRoutes = require('./routes/premiumFeatures');
 const passwordRoutes = require('./routes/forgotPassword');
 
-// const User = require('./models/user');
-// const Expense = require('./models/expense');
-// const Order = require('./models/orders');
-// const ForgotPassword = require('./models/forgotPassword');
-// const Downloads = require('./models/download');
-
 app.use(express.static('public'));
 app.use(bodyParser.json({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -51,30 +44,9 @@ app.use((req,res) => {
 
 app.use(errorController.get404);
 
-// User.hasMany(Expense);
-// Expense.belongsTo(User);
-
-// User.hasMany(Order);
-// Order.belongsTo(User);
-
-// User.hasMany(ForgotPassword);
-// ForgotPassword.belongsTo(User);
-
-// User.hasMany(Downloads);
-// Downloads.belongsTo(User);
-
-console.log(process.env.NODE_ENV); // express.js use it as default to detrermine environment mode
 // go to mongodb atlas -> create cluster -> connect to created cluster and get url.
 mongoose.connect(`mongodb+srv://nkword1899:${process.env.password}@nitishcluster0.e0nwreq.mongodb.net/Expense_Tracker?retryWrites=true&w=majority`)
 .then( result =>{
-  // User.findOne()
-  // .then(user =>{
-  //   if(!user){
-  //     const user = new User({name: 'Nitish', email: 'nitish@gmail.com', password:'nitish', phNo:'7903881009', ispremiumuser:false ,totalExpenses : 0});
-  //     user.save();
-  //   }
-  // })
-  
   app.listen(3000);
 })
 .catch(err => {
